@@ -9,16 +9,16 @@ connectDB();
 
 
 
-const hospitals = require ('./routes/hospitals');
-const appointments = require('./routes/appointments');
+const campgrounds = require ('./routes/campgrounds');
+const booking = require('./routes/booking');
 const auth = require('./routes/auth');
 const app = express();
 
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/api/v1/hospitals',hospitals);
-app.use('/api/v1/appointments',appointments);
+app.use('/api/v1/campgrounds',campgrounds);
+app.use('/api/v1/booking',booking);
 app.use('/api/v1/auth',auth);
 
 const PORT = process.env.PORT || 5000;
