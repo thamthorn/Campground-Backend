@@ -111,6 +111,8 @@ exports.getAppointment = async(req,res,next) => {
     catch(error){
         console.log(error);
         return res.status(500).json({success:false,message:"Cannot finds Booking"});
+
+        //hdrthsdhdthth
     }
 }
 
