@@ -1,4 +1,4 @@
-const Appointment = require('../models/Appointment');
+const Booking = require('../models/Booking');
 const Hospital = require('../models/Hospital');
 //@desc Get all appointment
 //@route GET/api/v1/appointment

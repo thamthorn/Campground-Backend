@@ -7,7 +7,6 @@ const HospitalSchema = new mongoose.Schema({
         unique: true,
         trim:true,
         maxlenght:[50,'Name can not be more than 50 characters']
-
         },
     address: {
         type: String,
