@@ -1,15 +1,15 @@
 const express = require('express');
-const {getCampgrounds,getCampground,createCampground,updateCampground,deleteCampground,getVacCenters} = require('../controllers/campgrounds');
+const {getCampgrounds,getCampground,createCampground,updateCampground,deleteCampground,getVacCenters} = require('../controllers/campground');
 
 //Include other resource routers
-const appointmentRouter = require('./appointments');
+const appointmentRouter = require('./booking');
 
 const router = express.Router();
 
 const {protect,authorize} = require('../middleware/auth');
 
 //Re-route into other resource routers
-router.use('/:campgroundId/appointments/',appointmentRouter);
+router.use('/:campgroundId/booking/',appointmentRouter);
 
 router.route('/vacCenters').get(getVacCenters);
 router.route('/').get(getCampgrounds).post(protect,authorize('admin') , createCampground);
