@@ -109,7 +109,7 @@ exports.getCampground = async (req,res,next) => {
 
 };
 
-exports.createHospital = async (req,res,next) => {
+exports.createCampground = async (req,res,next) => {
     // console.log(req.body);
     const campground = await Campground.create(req.body);
     res.status(201).json({
