@@ -1,25 +1,25 @@
-const Hospital = require('../models/Hospital');
-const vacCenter = require('../models/VacCenter');
+const Campground = require('../models/Campground');
+// const vacCenter = require('../models/VacCenter');
 
-exports.getVacCenters = (req,res,next) => {
-    vacCenter.getAll((err,data) => {
-        if(err){
-            res.status(500).send({
-                message:
-                  err.message || "Some error occurred while retrieving Vaccine Centers."
-            });
-        }
-        else{
-            res.send(data);
-        }
-    });
-};
+// exports.getVacCenters = (req,res,next) => {
+//     vacCenter.getAll((err,data) => {
+//         if(err){
+//             res.status(500).send({
+//                 message:
+//                   err.message || "Some error occurred while retrieving Vaccine Centers."
+//             });
+//         }
+//         else{
+//             res.send(data);
+//         }
+//     });
+// };
 
 
 
-exports.getHospitals = async (req,res,next) => {
+exports.getCampgrounds = async (req,res,next) => {
     try{
-        // const hospitals = await Hospital.find(req.query);
+        // const campgrounds = await Campground.find(req.query);
         // console.log(req.query);
         let query;
         //Copy req.query
@@ -39,7 +39,7 @@ exports.getHospitals = async (req,res,next) => {
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g,match=>`$${match}`);//
 
         //finding resource
-        query = Hospital.find(JSON.parse(queryStr)).populate('appointments');
+        query = Campground.find(JSON.parse(queryStr)).populate('bookings');
 
 
         //Select fields
@@ -53,19 +53,19 @@ exports.getHospitals = async (req,res,next) => {
             query = query.sort(sortBy);
         }
         else{
-            query = query.sort('-createdAt');
+            query = query.sort('name');
         }
         //pagination
         const page = parseInt(req.query.page,10) || 1;
         const limit = parseInt(req.query.limit,10) || 25;
         const startIndex = (page-1)*limit;
         const endIndex = page*limit;
-        const total = await Hospital.countDocuments();
+        const total = await Campground.countDocuments();
 
         query = query.skip(startIndex).limit(limit);
 
         //Executing query
-        const hospitals = await query;
+        const campgrounds = await query;
         //Pagination result
         const pagination = {};
 
@@ -82,7 +82,7 @@ exports.getHospitals = async (req,res,next) => {
                 limit
             }
         }
-        res.status(200).json({success:true,count:hospitals.length,pagination, data:hospitals});
+        res.status(200).json({success:true,count:campgrounds.length,pagination, data:campgrounds});
     }
     catch(err){
         res.status(400).json({success:false});
@@ -91,7 +91,7 @@ exports.getHospitals = async (req,res,next) => {
 };
 
 
-exports.getHospital = async (req,res,next) => {
+exports.getCampground = async (req,res,next) => {
     // res.status(200).json({success:true,msg:`Show hospital ${req.params.id}`});
     try{
         const hospital = await Hospital.findById(req.params.id);
@@ -111,44 +111,44 @@ exports.getHospital = async (req,res,next) => {
 
 exports.createHospital = async (req,res,next) => {
     // console.log(req.body);
-    const hospital = await Hospital.create(req.body);
+    const campground = await Campground.create(req.body);
     res.status(201).json({
         success: true,
-        data : hospital
+        data : campground
     });
     // res.status(200).json({success:true ,msg: 'Create new hospitals'});
 };
 
 
-exports.updateHospital = async (req,res,next) => {
+exports.updateCampground = async (req,res,next) => {
     // res.status(200).json({success:true ,msg: `Update hospital ${req.params.id}`});
     try{
-        const hospital = await Hospital.findByIdAndUpdate(req.params.id,req.body,{
+        const campground = await Campground.findByIdAndUpdate(req.params.id,req.body,{
             new: true,
             runValidators:true
         });
 
-        if(!hospital){
+        if(!campground){
             return res.status(400).json({success:false});
         }
 
-        res.status(200).json({success:true , data : hospital});
+        res.status(200).json({success:true , data : campground});
     }
     catch(err){
         res.status(400).json({success:false});
     }
 };
 
-exports.deleteHospital = async(req,res,next) => {
-    // res.status(200).json({success:true ,msg: `Delete hospital ${req.params.id}`});
+exports.deleteCampground = async(req,res,next) => {
+    // res.status(200).json({success:true ,msg: `Delete campground ${req.params.id}`});
 
     try{
-        const hospital = await Hospital.findById(req.params.id);
+        const campground = await Campground.findById(req.params.id);
 
-        if(!hospital){
+        if(!campground){
             return res.status(404).json({success : false,message:`Bootcamp not found with id of ${req.params.id}`});
         }
-        hospital.deleteOne();
+        campground.deleteOne();
         res.status(200).json({success : true , data : {}});
     }
     catch(err){
