@@ -18,4 +18,4 @@ router.route('/:id')
     .put(protect,authorize('admin','user'),updateBooking)
     .delete(protect,authorize('admin','user'),deleteBooking);
 
-module.exports = router;
+module.exports = router
