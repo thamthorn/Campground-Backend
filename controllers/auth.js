@@ -17,14 +17,16 @@ exports.logout = async(req,res,next) => {
 
 exports.register = async (req,res,next) => {
     try{
-        const {name , email , password , role} = req.body;
+        const {name , email , tel , role , password } = req.body;
 
         //Create user
         const user = await User.create({
             name,
             email,
-            password,
-            role
+            tel,
+            role,
+            password
+            
         });
         // const token = user.getSignedJwtToken();
         // res.status(200).json({success:true,token});
