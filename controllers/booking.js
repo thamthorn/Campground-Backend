@@ -120,22 +120,28 @@ exports.getBookings = async (req,res,next) => {
     if(req.user.role != 'admin'){ //General users can see only their appointment
         query = Booking.find({user:req.user.id}).populate({
             path:'campground',
-            select:'name province tel'
+            select:'name address tel'
         });
     }
     else{
         if(req.params.campgroundId){
             console.log(req.params.campgroundId);
-            query = Appointment.find({hospital:req.params.campgroundId}).populate({
+            query = Booking.find({hospital:req.params.campgroundId}).populate({
                 path:"campground",
-                select: "name province tel",
-            });
+                select: "name address tel",
+            }).populate({
+                path:"user",
+                select: "name"
+                })
         }
         else{
-            query = Campground.find().populate({
+            query = Booking.find().populate({
                 path:'campground',
-                select: ' name province tel'
-            });
+                select: 'name address tel'
+            }).populate({
+                path:"user",
+                select: "name"
+             });
         }
     
     }
