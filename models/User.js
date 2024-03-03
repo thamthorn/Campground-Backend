@@ -20,7 +20,7 @@ const UserSchema=new mongoose.Schema({
         required:[true,'Please enter your telephone number'],
         unique: true,
         match:[
-            /^\+[1-9]\d{1,14}$/,
+            /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)\d{4}$/,
             'Please add a valid telephone number'
         ]
     },
