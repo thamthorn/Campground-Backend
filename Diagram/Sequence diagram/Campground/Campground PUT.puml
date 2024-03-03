@@ -1,6 +1,6 @@
 @startuml Manage Campground (PUT)
 
-header Sameple VacQ Sequence Diagram
+header Sameple Campground Sequence Diagram
 footer Page %page% of %lastpage%
 title "Manage Campground (PUT)"
 

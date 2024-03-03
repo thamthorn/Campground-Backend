@@ -1,8 +1,8 @@
 @startuml Manage Campground (GET)
 
-header Sameple VacQ Sequence Diagram
+header Sameple Campground Sequence Diagram
 footer Page %page% of %lastpage%
-title "Manage Campground (GET)"
+title "Manage Campground (GET ONE)"
 
 participant "Client" as client
 participant "<<javaScript>>\n:server" as server
