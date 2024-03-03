@@ -1,0 +1,23 @@
+@startuml Manage Campground (GET)
+
+header Sameple VacQ Sequence Diagram
+footer Page %page% of %lastpage%
+title "Manage Campground (GET ONE)"
+
+participant "Client" as client
+participant "<<javaScript>>\n:server" as server
+participant "<<router>>\n:campgrounds" as routerCampgrounds
+participant "<<controllers>>\n:campground" as controllersCampground
+participant "<<model>>\n:Campground" as modelCampground
+database "<<MongoDB>>\n:campgrounds" as CampgroundsDatabase
+
+client->server ++:req.get('/campground/:id')
+server->routerCampgrounds ++:app.use('/campgrounds',campgrounds)
+routerCampgrounds -> controllersCampground ++:getCampground()
+controllersCampground->modelCampground ++:create(req.body)
+modelCampground ->CampgroundsDatabase ++: CampgroundSchema
+CampgroundsDatabase --> modelCampground --: campground
+controllersCampground <-- modelCampground --:campground
+controllersCampground->client --:response
+
+@enduml

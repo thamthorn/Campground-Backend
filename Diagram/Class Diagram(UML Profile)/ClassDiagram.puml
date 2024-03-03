@@ -1,0 +1,51 @@
+@startuml Campground Booking  Class Diagram
+left to right direction
+package "Campground Booking"{
+    class "<<Application>>\nCampground Booking" as CampgroundBooking{}
+
+    class "<<Resource>>\nCampgrounds" as ResourceCampgrounds{
+        <<GET>> +getCampgrounds():Campgorund
+        <<POST>> +creatCampground():Campground
+    }
+
+    class "<<Resource>>\nCampground" as ResourceCampground {
+        <<GET>> +getCampground(): Campground
+        <<PUT>> +updateCampground(): Campground
+        <<DELETE>> +deleteCampground(): void
+    }
+
+    class "<<Representation>>\nCampground" as RepresentationCampground {
+        -name
+        -address
+        -tel
+    }
+
+    class "<<Resource>>\nBookings" as ResourceBookings{
+        <<GET>> +getBookings():Booking
+        <<POST>> +addBooking():Booking
+    }
+
+    class "<<Resource>>\nBooking" as ResourceBooking {
+        <<GET>> +getBooking(): Booking
+        <<PUT>> +updateBooking(): Booking
+        <<DELETE>> +deleteBooking(): void
+    }
+
+    class "<<Representation>>\nBooking" as RepresentationBooking {
+        -apptDate
+        -user
+        -campground
+        -createdAt
+    }
+
+}
+
+CampgroundBooking ..> ResourceCampgrounds:"/campgrounds\n<<Path>>"
+ResourceCampgrounds ..> ResourceCampground: "/{campgroundId}\n<<Path>>"
+ResourceCampground ..> RepresentationCampground: "<<use>>"
+
+CampgroundBooking ..> ResourceBookings:"/Booking\n<<Path>>"
+ResourceBookings ..> ResourceBooking: "/{BookingId}\n<<Path>>"
+ResourceBooking ..> RepresentationBooking: "<<use>>"
+
+@enduml
