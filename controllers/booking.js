@@ -63,7 +63,7 @@ exports.updateBooking = async (req,res,next) => {
 }
 exports.addBooking = async (req,res,next) => {
     try {
-        req.body.Campground = req.params.campgroundId;
+        req.body.campground = req.params.campgroundId;
         const campground = await Campground.findById(req.params.campgroundId);
         if(!campground){
             return res.status(404).json({success:false,message:`No camp with the id of ${req.params.campgroundId}`});
@@ -80,7 +80,7 @@ exports.addBooking = async (req,res,next) => {
             return res.status(400).json({success:false,message:`The user with ID ${req.user.id} has already made 3 booking`});
         }
 
-        const booking = await Campground.create(req.body);
+        const booking = await Booking.create(req.body);
         res.status(200).json({
             success:true,
             data:booking
@@ -120,22 +120,28 @@ exports.getBookings = async (req,res,next) => {
     if(req.user.role != 'admin'){ //General users can see only their appointment
         query = Booking.find({user:req.user.id}).populate({
             path:'campground',
-            select:'name province tel'
+            select:'name address tel'
         });
     }
     else{
         if(req.params.campgroundId){
             console.log(req.params.campgroundId);
-            query = Appointment.find({hospital:req.params.campgroundId}).populate({
+            query = Booking.find({hospital:req.params.campgroundId}).populate({
                 path:"campground",
-                select: "name province tel",
-            });
+                select: "name address tel",
+            }).populate({
+                path:"user",
+                select: "name"
+                })
         }
         else{
-            query = Campground.find().populate({
+            query = Booking.find().populate({
                 path:'campground',
-                select: ' name province tel'
-            });
+                select: 'name address tel'
+            }).populate({
+                path:"user",
+                select: "name"
+             });
         }
     
     }

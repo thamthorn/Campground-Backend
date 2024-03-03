@@ -94,13 +94,13 @@ exports.getCampgrounds = async (req,res,next) => {
 exports.getCampground = async (req,res,next) => {
     // res.status(200).json({success:true,msg:`Show hospital ${req.params.id}`});
     try{
-        const hospital = await Hospital.findById(req.params.id);
+        const campground = await Campground.findById(req.params.id);
 
-        if(!hospital)
+        if(!campground)
             return res.status(400).json({success : false});
         
 
-        res.status(200).json({success : true , data:hospital});
+        res.status(200).json({success : true , data:campground});
     }
     catch(err){
         res.status(400).json({success:false});
@@ -111,12 +111,20 @@ exports.getCampground = async (req,res,next) => {
 
 exports.createCampground = async (req,res,next) => {
     // console.log(req.body);
-    const campground = await Campground.create(req.body);
+    try{
+        const campground = await Campground.create(req.body);
     res.status(201).json({
         success: true,
         data : campground
     });
+    }
+    catch(err){
+        res.status(400).json({success:false,message:err.message});
+        console.log(err.stack);
+    }
+    
     // res.status(200).json({success:true ,msg: 'Create new hospitals'});
+
 };
 
 
