@@ -63,7 +63,7 @@ exports.updateBooking = async (req,res,next) => {
 }
 exports.addBooking = async (req,res,next) => {
     try {
-        req.body.Campground = req.params.campgroundId;
+        req.body.campground = req.params.campgroundId;
         const campground = await Campground.findById(req.params.campgroundId);
         if(!campground){
             return res.status(404).json({success:false,message:`No camp with the id of ${req.params.campgroundId}`});
