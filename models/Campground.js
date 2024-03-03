@@ -15,7 +15,6 @@ const CampgroundSchema = new mongoose.Schema({
     tel:{
         type: String,
         required: [true,'Please add a tel. number'],
-        unique: true,
         match:[
             /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)\d{4}$/,
             'Please add a valid telephone number'

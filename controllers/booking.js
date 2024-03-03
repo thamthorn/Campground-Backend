@@ -80,7 +80,7 @@ exports.addBooking = async (req,res,next) => {
             return res.status(400).json({success:false,message:`The user with ID ${req.user.id} has already made 3 booking`});
         }
 
-        const booking = await Campground.create(req.body);
+        const booking = await Booking.create(req.body);
         res.status(200).json({
             success:true,
             data:booking
