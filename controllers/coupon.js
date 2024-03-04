@@ -23,7 +23,8 @@ exports.getCoupons = async (req,res,next) => {
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g,match=>`$${match}`);//
 
         //finding resource
-        // query = Coupon.find(JSON.parse(queryStr)).populate('appointments'); ////////////////////////////////////
+        query = Coupon.find(JSON.parse(queryStr))
+        // .populate('appointments'); ////////////////////////////////////
 
 
         //Select fields
@@ -37,7 +38,7 @@ exports.getCoupons = async (req,res,next) => {
             query = query.sort(sortBy);
         }
         else{
-            query = query.sort('-createdAt');
+            query = query.sort('name');
         }
         //pagination
         const page = parseInt(req.query.page,10) || 1;
@@ -69,7 +70,10 @@ exports.getCoupons = async (req,res,next) => {
         res.status(200).json({success:true,count:coupons.length,pagination, data:coupons});
     }
     catch(err){
-        res.status(400).json({success:false});
+        res.status(400).json({
+            success:false,
+            msg: err.message
+        });
     }
 
 };
@@ -132,7 +136,7 @@ exports.deleteCoupon = async(req,res,next) => {
         if(!coupon){
             return res.status(404).json({success : false,message:`Bootcamp not found with id of ${req.params.id}`});
         }
-        coupon.deleteOne();
+        await coupon.deleteOne();
         res.status(200).json({success : true , data : {}});
     }
     catch(err){
