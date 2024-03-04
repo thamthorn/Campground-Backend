@@ -24,7 +24,13 @@ const CampgroundSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Please add a price'],
         min: [0, 'Price must be a positive number']
+    },
+    rating: {
+        type: Number,
+        min: [1, 'Rating must be between 1 and 5'],
+        max: [5, 'Rating must be between 1 and 5']
     }
+
 }, {
     toJSON:{virtuals:true},
     toObject:{virtuals:true}

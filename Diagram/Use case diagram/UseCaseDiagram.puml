@@ -7,8 +7,8 @@ actor "Admin" as admin
 rectangle "Campground Booking" as CampgroundBooking {    
     usecase "Register" as register
     usecase "View\nCampgrounds" as viewCampgrounds
-    usecase "Manage\nBooking" as manageBooking
     usecase "Manage\nCampground" as manageCampground
+    usecase "Manage\nBooking" as manageBooking
 }
 
 user --> register
