@@ -30,7 +30,6 @@ const CampgroundSchema = new mongoose.Schema({
         min: [1, 'Rating must be between 1 and 5'],
         max: [5, 'Rating must be between 1 and 5']
     }
-
 }, {
     toJSON:{virtuals:true},
     toObject:{virtuals:true}

@@ -40,7 +40,7 @@ exports.getCampgrounds = async (req,res,next) => {
             query = query.sort(sortBy);
         }
         else{
-            query = query.sort('name');
+            query = query.sort({ rating: -1 });
         }
         //pagination
         const page = parseInt(req.query.page,10) || 1;
