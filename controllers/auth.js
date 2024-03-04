@@ -28,8 +28,7 @@ exports.register = async (req,res,next) => {
             password
             
         });
-        // const token = user.getSignedJwtToken();
-        // res.status(200).json({success:true,token});
+        
         sendTokenResponse(user,200,res);
     }
     catch(err){
@@ -66,10 +65,6 @@ exports.login = async (req,res,next) => {
             return res.status(401).json({success:false,msg:'Invalid credentials'});
         }
     
-    
-        // const token = user.getSignedJwtToken();
-    
-        // res.status(200).json({success:true,token});
     
         sendTokenResponse(user,200,res);
     }

@@ -1,26 +1,13 @@
 const Campground = require('../models/Campground');
-// const vacCenter = require('../models/VacCenter');
 
-// exports.getVacCenters = (req,res,next) => {
-//     vacCenter.getAll((err,data) => {
-//         if(err){
-//             res.status(500).send({
-//                 message:
-//                   err.message || "Some error occurred while retrieving Vaccine Centers."
-//             });
-//         }
-//         else{
-//             res.send(data);
-//         }
-//     });
-// };
+
+
 
 
 
 exports.getCampgrounds = async (req,res,next) => {
     try{
-        // const campgrounds = await Campground.find(req.query);
-        // console.log(req.query);
+    
         let query;
         //Copy req.query
         const reqQuery = {...req.query};
@@ -92,7 +79,6 @@ exports.getCampgrounds = async (req,res,next) => {
 
 
 exports.getCampground = async (req,res,next) => {
-    // res.status(200).json({success:true,msg:`Show hospital ${req.params.id}`});
     try{
         const campground = await Campground.findById(req.params.id);
 
@@ -110,7 +96,6 @@ exports.getCampground = async (req,res,next) => {
 };
 
 exports.createCampground = async (req,res,next) => {
-    // console.log(req.body);
     try{
         const campground = await Campground.create(req.body);
     res.status(201).json({
@@ -122,14 +107,11 @@ exports.createCampground = async (req,res,next) => {
         res.status(400).json({success:false,message:err.message});
         console.log(err.stack);
     }
-    
-    // res.status(200).json({success:true ,msg: 'Create new hospitals'});
 
 };
 
 
 exports.updateCampground = async (req,res,next) => {
-    // res.status(200).json({success:true ,msg: `Update hospital ${req.params.id}`});
     try{
         const campground = await Campground.findByIdAndUpdate(req.params.id,req.body,{
             new: true,
@@ -148,8 +130,6 @@ exports.updateCampground = async (req,res,next) => {
 };
 
 exports.deleteCampground = async(req,res,next) => {
-    // res.status(200).json({success:true ,msg: `Delete campground ${req.params.id}`});
-
     try{
         const campground = await Campground.findById(req.params.id);
 

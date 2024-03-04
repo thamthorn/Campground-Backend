@@ -1,8 +1,6 @@
-const Booking = require('../models/Booking'); //Appointment
-const Campground = require('../models/Campground'); //Hospital
-//@desc Get all appointment
-//@route GET/api/v1/appointment
-//@access Public
+const Booking = require('../models/Booking'); 
+const Campground = require('../models/Campground'); 
+
 
 exports.deleteBooking = async (req,res,next) => {
     try{
@@ -72,10 +70,10 @@ exports.addBooking = async (req,res,next) => {
         //add user Id to req.body
         req.body.user = req.user.id;
 
-        //Check for existed appointment
+        //Check for existed booking
         const existedBookings = await Booking.find({user:req.user.id});
 
-        //If the user is not admin , they can only create 3 appointment
+        //If the user is not admin , they can only create 3 booking
         if(existedBookings.length >= 3 && req.user.role !== 'admin'){
             return res.status(400).json({success:false,message:`The user with ID ${req.user.id} has already made 3 booking`});
         }
@@ -117,7 +115,7 @@ exports.getBooking = async(req,res,next) => {
 exports.getBookings = async (req,res,next) => {
     let query;
 
-    if(req.user.role != 'admin'){ //General users can see only their appointment
+    if(req.user.role != 'admin'){ //General users can see only their booking
         query = Booking.find({user:req.user.id}).populate({
             path:'campground',
             select:'name address tel'
@@ -146,7 +144,7 @@ exports.getBookings = async (req,res,next) => {
     
     }
     try{
-        const bookings = await query; //appointments
+        const bookings = await query; 
         res.status(200).json({
             success:true,
             count:bookings.length,
