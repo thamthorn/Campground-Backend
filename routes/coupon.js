@@ -1,7 +1,8 @@
 const express = require('express');
 const {getCoupons,getCoupon,createCoupon,updateCoupon,deleteCoupon} = require('../controllers/coupon');
 
-const router = express.Router({mergeParams:true});
+// const router = express.Router({mergeParams:true});
+const router = express.Router();
 
 const {protect,authorize} = require('../middleware/auth');
 
