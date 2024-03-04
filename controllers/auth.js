@@ -1,6 +1,5 @@
 const User = require('../models/User');
 
-
 exports.logout = async(req,res,next) => {
     res.cookie('token','none',{
         expires : new Date(Date.now() + 10*1000),
@@ -12,8 +11,6 @@ exports.logout = async(req,res,next) => {
         data:{}
     });
 };
-
-
 
 exports.register = async (req,res,next) => {
     try{
@@ -28,8 +25,7 @@ exports.register = async (req,res,next) => {
             password
             
         });
-        // const token = user.getSignedJwtToken();
-        // res.status(200).json({success:true,token});
+        
         sendTokenResponse(user,200,res);
     }
     catch(err){
@@ -66,10 +62,6 @@ exports.login = async (req,res,next) => {
             return res.status(401).json({success:false,msg:'Invalid credentials'});
         }
     
-    
-        // const token = user.getSignedJwtToken();
-    
-        // res.status(200).json({success:true,token});
     
         sendTokenResponse(user,200,res);
     }
