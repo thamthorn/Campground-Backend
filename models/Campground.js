@@ -19,14 +19,16 @@ const CampgroundSchema = new mongoose.Schema({
             /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)\d{4}$/,
             'Please add a valid telephone number'
         ]
-        },
-        
-    
+    },
+    price: {
+        type: Number,
+        required: [true, 'Please add a price'],
+        min: [0, 'Price must be a positive number']
+    }
 }, {
     toJSON:{virtuals:true},
     toObject:{virtuals:true}
 });
-
 
 //Cascade delete bookings when a campground is deleted
 CampgroundSchema.pre('deleteOne',{document:true , query:false},async function(next) {

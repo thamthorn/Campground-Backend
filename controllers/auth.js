@@ -1,6 +1,5 @@
 const User = require('../models/User');
 
-
 exports.logout = async(req,res,next) => {
     res.cookie('token','none',{
         expires : new Date(Date.now() + 10*1000),
@@ -12,8 +11,6 @@ exports.logout = async(req,res,next) => {
         data:{}
     });
 };
-
-
 
 exports.register = async (req,res,next) => {
     try{

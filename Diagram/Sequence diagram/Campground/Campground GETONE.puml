@@ -1,6 +1,6 @@
 @startuml Manage Campground (GET)
 
-header Sameple VacQ Sequence Diagram
+header Sameple Campground Sequence Diagram
 footer Page %page% of %lastpage%
 title "Manage Campground (GET ONE)"
 
@@ -11,7 +11,7 @@ participant "<<controllers>>\n:campground" as controllersCampground
 participant "<<model>>\n:Campground" as modelCampground
 database "<<MongoDB>>\n:campgrounds" as CampgroundsDatabase
 
-client->server ++:req.get('/campground/:id')
+client->server ++:req.get('/campgrounds/:id')
 server->routerCampgrounds ++:app.use('/campgrounds',campgrounds)
 routerCampgrounds -> controllersCampground ++:getCampground()
 controllersCampground->modelCampground ++:create(req.body)
