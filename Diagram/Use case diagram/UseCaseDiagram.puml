@@ -4,17 +4,17 @@ actor "User" as user
 rectangle " Campground Booking" as  CampgroundBooking {    
     usecase "Register" as register
     usecase "View\nCampgrounds" as viewCampgrounds
-    usecase "Manage\nBooking" as manageBooking
     usecase "Manage\nCampground" as manageCampground
+    usecase "Manage\nBooking" as manageBooking
 }
 
 user -- register
 user -- viewCampgrounds
-user -- manageCampground
+user -- manageBooking
 
 actor "Admin" as admin
 register -- admin
+manageBooking-- admin
 manageCampground -- admin
-manageBooking -- admin
 
 @enduml
