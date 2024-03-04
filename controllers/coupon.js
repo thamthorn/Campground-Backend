@@ -1,8 +1,6 @@
 const Coupon = require('../models/Coupon');
 
 
-
-
 exports.getCoupons = async (req,res,next) => {
     try{
         // const hospitals = await Hospital.find(req.query);
@@ -125,7 +123,7 @@ exports.updateCoupon = async (req,res,next) => {
     }
 };
 
-exports.deleteHospital = async(req,res,next) => {
+exports.deleteCoupon = async(req,res,next) => {
     // res.status(200).json({success:true ,msg: `Delete hospital ${req.params.id}`});
 
     try{
