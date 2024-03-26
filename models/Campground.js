@@ -29,6 +29,10 @@ const CampgroundSchema = new mongoose.Schema({
         type: Number,
         min: [1, 'Rating must be between 1 and 5'],
         max: [5, 'Rating must be between 1 and 5']
+    },
+    picture: {
+        type: String,
+        required: [true,'Please add a picture link']
     }
 }, {
     toJSON:{virtuals:true},
