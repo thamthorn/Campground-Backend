@@ -11,7 +11,7 @@ const CouponSchema = new mongoose.Schema({
     expiredDate: {
         type : Date,
         //30 days expired
-        default : Date.now + (30 * 24 * 60 * 60 * 1000)
+        default : Date.now() + (30 * 24 * 60 * 60 * 1000)
     }
 });
 

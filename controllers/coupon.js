@@ -132,7 +132,8 @@ exports.deleteCoupon = async(req,res,next) => {
         if(!coupon){
             return res.status(404).json({success : false,message:`Bootcamp not found with id of ${req.params.id}`});
         }
-        coupon.deleteOne();
+
+        await coupon.deleteOne();
         res.status(200).json({success : true , data : {}});
     }
     catch(err){
